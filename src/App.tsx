@@ -4,11 +4,7 @@ import React, { ReactElement } from "react";
 import MyRoutes from "./router";
 
 function App(): ReactElement {
-	return (
-		<div className="App">
-			<MyRoutes />
-		</div>
-	);
+	return <MyRoutes />;
 }
 
 export default App;
