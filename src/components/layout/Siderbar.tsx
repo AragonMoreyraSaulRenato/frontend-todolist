@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import ListadoProyectos from "../proyectos/ListadoProyectos";
 import NuevoProyecto from "../proyectos/NuevoProyecto";
 
 export default function Siderbar(): ReactElement {
@@ -12,6 +13,7 @@ export default function Siderbar(): ReactElement {
 
 			<div className="proyectos">
 				<h2>Tus proyectos</h2>
+				<ListadoProyectos />
 			</div>
 		</aside>
 	);
