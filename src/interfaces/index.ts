@@ -1,6 +1,6 @@
 export interface IProyecto {
-	nombre?: string;
 	id?: string | number;
+	nombre?: string;
 }
 
 export interface ITarea {

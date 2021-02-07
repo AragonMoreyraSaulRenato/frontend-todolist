@@ -8,6 +8,7 @@ import {
 	OBTENER_PROYECTOS,
 	AGREGAR_PROYECTO,
 	VALIDAR_FORMULARIO,
+	PROYECTO_ACTUAL,
 } from "../../types";
 import { IProyecto } from "../../interfaces";
 
@@ -44,16 +45,23 @@ const ProyectoState = (props: ProyectoStateProps) => {
 		dispatch({ type: VALIDAR_FORMULARIO });
 	};
 
+	//SELECIONA EL PROYECTO QUE EL USUARIO DIO CLICK
+	const proyectoActual = (proyecto: IProyecto): void => {
+		dispatch({ type: PROYECTO_ACTUAL, payload: proyecto });
+	};
+
 	return (
 		<proyectoContext.Provider
 			value={{
 				formulario: state.formulario,
 				proyectos: state.proyectos,
 				error: state.error,
+				proyecto: state.proyecto,
 				mostrarFormulario,
 				obtenerProyectos,
 				agregarProyecto,
 				mostrarError,
+				proyectoActual,
 			}}
 		>
 			{props.children}

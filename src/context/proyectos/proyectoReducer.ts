@@ -4,11 +4,13 @@ import {
 	OBTENER_PROYECTOS,
 	AGREGAR_PROYECTO,
 	VALIDAR_FORMULARIO,
+	PROYECTO_ACTUAL,
 } from "../../types";
 
+interface IAction {}
 interface IAction {
 	type: string;
-	payload?: Array<IProyecto> | IProyecto;
+	payload?: IProyecto | Array<IProyecto>;
 }
 
 const reducer = (state, action: IAction) => {
@@ -26,6 +28,14 @@ const reducer = (state, action: IAction) => {
 			};
 		case VALIDAR_FORMULARIO:
 			return { ...state, error: true };
+		case PROYECTO_ACTUAL:
+			const { id } = action.payload as IProyecto;
+			return {
+				...state,
+				proyecto: state.proyectos.filter(
+					(proyecto: IProyecto) => proyecto.id === id
+				),
+			};
 		default:
 			return state;
 	}
