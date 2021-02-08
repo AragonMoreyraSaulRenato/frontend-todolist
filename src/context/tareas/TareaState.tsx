@@ -7,6 +7,8 @@ import {
 	AGREGAR_TAREA,
 	VALIDAR_TAREA,
 	ELIMINAR_TAREA,
+	ESTADO_TAREA,
+	TAREA_ACTUAL,
 } from "./tareaTypes";
 
 interface ContextProps {
@@ -27,6 +29,7 @@ const TareaState = (props: ContextProps) => {
 		],
 		tareasProyecto: null,
 		error: false,
+		tareaActual: null,
 	};
 
 	const [state, dispatch] = useReducer(TareaReducer, initalState);
@@ -47,6 +50,14 @@ const TareaState = (props: ContextProps) => {
 		dispatch({ type: ELIMINAR_TAREA, payload: tareaId });
 	};
 
+	const cambiarEstadoTarea = (tarea: ITarea): void => {
+		dispatch({ type: ESTADO_TAREA, payload: tarea });
+	};
+
+	const guardarTareaActual = (tarea: ITarea): void => {
+		dispatch({ type: TAREA_ACTUAL, payload: tarea });
+	};
+
 	return (
 		<TareaContext.Provider
 			value={{
@@ -57,6 +68,8 @@ const TareaState = (props: ContextProps) => {
 				agregarTarea,
 				validarTarea,
 				eliminarTarea,
+				cambiarEstadoTarea,
+				guardarTareaActual,
 			}}
 		>
 			{props.children}

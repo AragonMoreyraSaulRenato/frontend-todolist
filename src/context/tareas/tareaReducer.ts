@@ -4,6 +4,7 @@ import {
 	AGREGAR_TAREA,
 	VALIDAR_TAREA,
 	ELIMINAR_TAREA,
+	ESTADO_TAREA,
 } from "./tareaTypes";
 
 const reducer = (state, action) => {
@@ -28,6 +29,13 @@ const reducer = (state, action) => {
 				...state,
 				tareas: state.tareas.filter(
 					(tarea: ITarea) => tarea.id !== action.payload
+				),
+			};
+		case ESTADO_TAREA:
+			return {
+				...state,
+				tareas: state.tareasProyecto.map((tarea: ITarea) =>
+					tarea.id === action.payload.id ? action.payload : tarea
 				),
 			};
 		default:

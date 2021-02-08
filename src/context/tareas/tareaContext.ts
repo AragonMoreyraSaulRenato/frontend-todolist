@@ -9,6 +9,8 @@ interface IContextTarea {
 	agregarTarea: (tarea: ITarea) => void;
 	validarTarea: () => void;
 	eliminarTarea: (tareaId: number) => void;
+	cambiarEstadoTarea: (tarea: ITarea) => void;
+	guardarTareaActual: (tarea: ITarea) => void;
 }
 
 const TareaContext = createContext<IContextTarea>({
@@ -19,6 +21,8 @@ const TareaContext = createContext<IContextTarea>({
 	agregarTarea: (tarea: ITarea): void => {},
 	validarTarea: () => {},
 	eliminarTarea: (tareaId: number) => {},
+	cambiarEstadoTarea: (tarea: ITarea) => {},
+	guardarTareaActual: (tarea: ITarea) => {},
 });
 
 export default TareaContext;
