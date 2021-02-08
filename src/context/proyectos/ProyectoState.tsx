@@ -1,18 +1,19 @@
 import React, { useReducer, ReactElement } from "react";
 import { v4 as uuid } from "uuid";
-import proyectoContext from "./proyectoContext";
-import proyectoReducer from "./proyectoReducer";
-import { initialStateProyecto } from "./initialState";
+import ProyectoContext from "./proyectoContext";
+import ProyectoReducer from "./proyectoReducer";
+
 import {
 	FORMULARIO_PROYECTO,
 	OBTENER_PROYECTOS,
 	AGREGAR_PROYECTO,
 	VALIDAR_FORMULARIO,
 	PROYECTO_ACTUAL,
+	ELIMINAR_PROYECTO,
 } from "../../types";
 import { IProyecto } from "../../interfaces";
 
-interface ProyectoStateProps {
+interface ContextProps {
 	children?: ReactElement;
 }
 
@@ -23,8 +24,13 @@ const proyectos = [
 	{ id: 4, nombre: "Decidir empresa" },
 ];
 
-const ProyectoState = (props: ProyectoStateProps) => {
-	const [state, dispatch] = useReducer(proyectoReducer, initialStateProyecto);
+const ProyectoState = (props: ContextProps) => {
+	const [state, dispatch] = useReducer(ProyectoReducer, {
+		formulario: false,
+		proyectos: [],
+		error: false,
+		proyecto: null,
+	});
 
 	const mostrarFormulario = (): void => {
 		dispatch({
@@ -46,12 +52,16 @@ const ProyectoState = (props: ProyectoStateProps) => {
 	};
 
 	//SELECIONA EL PROYECTO QUE EL USUARIO DIO CLICK
-	const proyectoActual = (proyecto: IProyecto): void => {
-		dispatch({ type: PROYECTO_ACTUAL, payload: proyecto });
+	const proyectoActual = (id: number): void => {
+		dispatch({ type: PROYECTO_ACTUAL, payload: id });
+	};
+
+	const eliminarProyecto = (id: number): void => {
+		dispatch({ type: ELIMINAR_PROYECTO, payload: id });
 	};
 
 	return (
-		<proyectoContext.Provider
+		<ProyectoContext.Provider
 			value={{
 				formulario: state.formulario,
 				proyectos: state.proyectos,
@@ -62,10 +72,11 @@ const ProyectoState = (props: ProyectoStateProps) => {
 				agregarProyecto,
 				mostrarError,
 				proyectoActual,
+				eliminarProyecto,
 			}}
 		>
 			{props.children}
-		</proyectoContext.Provider>
+		</ProyectoContext.Provider>
 	);
 };
 

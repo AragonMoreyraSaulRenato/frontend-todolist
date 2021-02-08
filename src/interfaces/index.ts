@@ -1,10 +1,11 @@
 export interface IProyecto {
-	id?: string | number;
+	id?: number;
 	nombre?: string;
 }
 
 export interface ITarea {
-	id?: string | number;
+	id?: number;
 	nombre?: string;
 	estado?: boolean;
+	proyectoId: number;
 }

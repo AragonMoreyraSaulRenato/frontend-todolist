@@ -11,7 +11,8 @@ export default function ListadoProyectos(): ReactElement | null {
 		// eslint-disable-next-line
 	}, []);
 
-	if (proyectos.length === 0) return null;
+	if (proyectos.length === 0)
+		return <p>No hay proyectos, comienza creando uno</p>;
 
 	return (
 		<ul className="listado-proyectos">
