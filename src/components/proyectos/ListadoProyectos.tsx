@@ -8,7 +8,6 @@ export default function ListadoProyectos(): ReactElement | null {
 
 	useEffect(() => {
 		obtenerProyectos();
-
 		// eslint-disable-next-line
 	}, []);
 

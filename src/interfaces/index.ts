@@ -7,5 +7,5 @@ export interface ITarea {
 	id?: number;
 	nombre?: string;
 	estado?: boolean;
-	proyectoId: number;
+	proyectoId?: number;
 }

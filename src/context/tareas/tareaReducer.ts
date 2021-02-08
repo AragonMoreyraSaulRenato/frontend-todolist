@@ -5,6 +5,9 @@ import {
 	VALIDAR_TAREA,
 	ELIMINAR_TAREA,
 	ESTADO_TAREA,
+	TAREA_ACTUAL,
+	ACTUALIZAR_TAREA,
+	LIMPIAR_TAREA,
 } from "./tareaTypes";
 
 const reducer = (state, action) => {
@@ -32,12 +35,17 @@ const reducer = (state, action) => {
 				),
 			};
 		case ESTADO_TAREA:
+		case ACTUALIZAR_TAREA:
 			return {
 				...state,
-				tareas: state.tareasProyecto.map((tarea: ITarea) =>
+				tareas: state.tareas.map((tarea: ITarea) =>
 					tarea.id === action.payload.id ? action.payload : tarea
 				),
 			};
+		case TAREA_ACTUAL:
+			return { ...state, tareaActual: action.payload };
+		case LIMPIAR_TAREA:
+			return { ...state, tareaActual: null };
 		default:
 			return state;
 	}
