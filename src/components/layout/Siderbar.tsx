@@ -6,7 +6,7 @@ export default function Siderbar(): ReactElement {
 	return (
 		<aside>
 			<h1>
-				Mern <span>Tasks</span>
+				MERN<span>Tasks</span>
 			</h1>
 
 			<NuevoProyecto />

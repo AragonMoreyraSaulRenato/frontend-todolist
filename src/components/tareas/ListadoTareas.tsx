@@ -1,4 +1,5 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useRef } from "react";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { ITarea } from "../../interfaces";
 import Tarea from "./Tarea";
 import proyectoContext from "../../context/proyectos/proyectoContext";
@@ -7,6 +8,7 @@ import tareasContext from "../../context/tareas/tareaContext";
 export default function ListadoTareas() {
 	const { proyecto, eliminarProyecto } = useContext(proyectoContext);
 	const { tareasProyecto } = useContext(tareasContext);
+	const transitionRef = useRef();
 
 	//SI NO HAY NINGUN PROYECTO
 	if (!proyecto) return <h2>Selecciona un proyecto</h2>;
@@ -20,9 +22,17 @@ export default function ListadoTareas() {
 						<p>No hay tareas</p>
 					</li>
 				) : (
-					tareasProyecto.map((tarea: ITarea) => (
-						<Tarea key={`item-tareas-${tarea.id}`} tarea={tarea} />
-					))
+					<TransitionGroup ref={transitionRef}>
+						{tareasProyecto.map((tarea: ITarea) => (
+							<CSSTransition
+								timeout={200}
+								classNames="tarea"
+								key={`item-tareas-${tarea.id}`}
+							>
+								<Tarea tarea={tarea} />
+							</CSSTransition>
+						))}
+					</TransitionGroup>
 				)}
 			</ul>
 

@@ -2,12 +2,20 @@ import { ITarea } from "../../interfaces";
 
 import tareasContext from "../../context/tareas/tareaContext";
 import { useContext } from "react";
+import proyectoContext from "../../context/proyectos/proyectoContext";
 interface TareaProps {
 	tarea: ITarea;
 }
 
 export default function Tarea({ tarea }: TareaProps) {
-	const { eliminarTarea } = useContext(tareasContext);
+	const { proyecto } = useContext(proyectoContext);
+	const { eliminarTarea, obtenerTareas } = useContext(tareasContext);
+
+	const handleDelete = (tareaId: number) => {
+		const idProyecto = proyecto?.id as number;
+		eliminarTarea(tareaId);
+		obtenerTareas(idProyecto);
+	};
 
 	return (
 		<li className="tarea sombra">
@@ -32,7 +40,7 @@ export default function Tarea({ tarea }: TareaProps) {
 				<button
 					type="button"
 					className="btn btn-secundario"
-					onClick={() => eliminarTarea(tarea.id ? tarea.id : 0)}
+					onClick={() => handleDelete(tarea.id ? tarea.id : 0)}
 				>
 					Eliminar
 				</button>

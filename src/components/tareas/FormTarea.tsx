@@ -59,7 +59,7 @@ export default function FormTarea() {
 					<input
 						type="text"
 						className="input-text"
-						name="tarea"
+						name="nombre"
 						placeholder="Nombre tarea"
 						value={nombre}
 						onChange={handleChange}
