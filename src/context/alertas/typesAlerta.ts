@@ -1,0 +1,2 @@
+export const MOSTRAR_ALERTA = "MOSTRAR_ALERTA";
+export const OCULAR_ALERTA = "OCULAR_ALERTA";

@@ -10,7 +10,12 @@ import {
 	LIMPIAR_TAREA,
 } from "./tareaTypes";
 
-const reducer = (state, action) => {
+interface IActionTarea {
+	type: string;
+	payload?: ITarea | Array<ITarea> | number;
+}
+
+const reducer = (state, action: IActionTarea) => {
 	switch (action.type) {
 		case TAREAS_PROYECTO:
 			return {
@@ -36,10 +41,11 @@ const reducer = (state, action) => {
 			};
 		case ESTADO_TAREA:
 		case ACTUALIZAR_TAREA:
+			const tareaPayload = action.payload as ITarea;
 			return {
 				...state,
 				tareas: state.tareas.map((tarea: ITarea) =>
-					tarea.id === action.payload.id ? action.payload : tarea
+					tarea.id === tareaPayload.id ? tareaPayload : tarea
 				),
 			};
 		case TAREA_ACTUAL:
