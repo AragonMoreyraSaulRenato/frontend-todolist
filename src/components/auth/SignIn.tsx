@@ -1,13 +1,27 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export default function SignIn(): ReactElement {
+import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/authentication/authContext";
+
+export default function SignIn(props): ReactElement {
+	const { alerta, mostrarAlerta } = useContext(AlertaContext);
+	const { mensaje, autenticado, iniciarSesion } = useContext(AuthContext);
+
 	const [user, setUser] = useState({
 		email: "",
 		password: "",
 	});
 
 	const { email, password } = user;
+
+	useEffect(() => {
+		if (autenticado) props.history.push("/proyectos");
+
+		if (mensaje) mostrarAlerta(mensaje.msg, "alerta-error");
+
+		// eslint-disable-next-line
+	}, [mensaje, autenticado, props.history]);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setUser({
@@ -18,10 +32,19 @@ export default function SignIn(): ReactElement {
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
+
+		if (email.trim() === "" || password.trim() === "") {
+			mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
+		}
+
+		iniciarSesion({ email, password });
 	};
 
 	return (
 		<div className="form-usuario">
+			{alerta && (
+				<div className={`alerta ${alerta.category}`}>{alerta.msg}</div>
+			)}
 			<div className="contenedor-form sombrea-dark">
 				<h1>Iniciar Sesion</h1>
 

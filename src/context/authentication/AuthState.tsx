@@ -12,6 +12,7 @@ import clienteAxios from "../../config/axios";
 import tokenAuth from "../../config/tokenAuth";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
+import { IUsuario } from "../../interfaces";
 
 interface ContextProps {
 	children?: ReactElement;
@@ -58,6 +59,21 @@ const AuthState = ({ children }: ContextProps) => {
 		}
 	};
 
+	const iniciarSesion = async (datos: IUsuario) => {
+		try {
+			const respuesta = await clienteAxios.post("/api/auth", datos);
+			dispatch({ type: LOGIN_EXITOSO, payload: respuesta.data });
+			usuarioAutenticado();
+		} catch (error) {
+			console.log(error.response.data.msg);
+			const alerta = {
+				msg: error.response.data.msg,
+				category: "alerta-error",
+			};
+			dispatch({ type: LOGIN_ERROR, payload: alerta });
+		}
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -66,6 +82,7 @@ const AuthState = ({ children }: ContextProps) => {
 				usuario: state.usuario,
 				mensaje: state.mensaje,
 				registrarUsuario,
+				iniciarSesion,
 			}}
 		>
 			{children}
