@@ -10,7 +10,7 @@ import {
 	VALIDAR_FORMULARIO,
 	PROYECTO_ACTUAL,
 	ELIMINAR_PROYECTO,
-} from "../../types";
+} from "./proyectoTypes";
 import { IProyecto } from "../../interfaces";
 
 interface ContextProps {

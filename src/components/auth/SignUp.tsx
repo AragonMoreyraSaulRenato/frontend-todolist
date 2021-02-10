@@ -1,7 +1,20 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/authentication/authContext";
 
-export default function SignUp(): ReactElement {
+export default function SignUp(props): ReactElement {
+	const { alerta, mostrarAlerta } = useContext(AlertaContext);
+	const { mensaje, autenticado, registrarUsuario } = useContext(AuthContext);
+
+	useEffect(() => {
+		if (autenticado) props.history.push("/proyectos");
+
+		if (mensaje) mostrarAlerta(mensaje.msg, "alerta-error");
+
+		// eslint-disable-next-line
+	}, [mensaje, autenticado, props.history]);
+
 	const [user, setUser] = useState({
 		nombre: "",
 		email: "",
@@ -22,22 +35,50 @@ export default function SignUp(): ReactElement {
 		e.preventDefault();
 
 		//no campos vacios
+		if (
+			nombre.trim() === "" ||
+			email.trim() === "" ||
+			password.trim() === "" ||
+			confirmar.trim() === ""
+		) {
+			mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
+			return;
+		}
 
 		//password minimo 6 caracteres
+		if (password.length < 6) {
+			mostrarAlerta(
+				"La contraseña debe ser de al menos 6 caracteres",
+				"alerta-error"
+			);
+			return;
+		}
 
 		//dos password iguales
+		if (password !== confirmar) {
+			mostrarAlerta("Las contraseñas no coinciden", "alerta-error");
+			return;
+		}
 
 		//pasarlo al action
+		registrarUsuario({
+			nombre,
+			email,
+			password,
+		});
 	};
 
 	return (
 		<div className="form-usuario">
+			{alerta && (
+				<div className={`alerta ${alerta.category}`}>{alerta.msg}</div>
+			)}
 			<div className="contenedor-form sombrea-dark">
 				<h1>Obtener una cuenta</h1>
 
 				<form onSubmit={onSubmit}>
 					<div className="campo-form">
-						<label htmlFor="nombre">Email</label>
+						<label htmlFor="nombre">Nombre</label>
 						<input
 							value={nombre}
 							type="text"
@@ -71,12 +112,12 @@ export default function SignUp(): ReactElement {
 						/>
 					</div>
 					<div className="campo-form">
-						<label htmlFor="password">Password</label>
+						<label htmlFor="password">Confirma Password</label>
 						<input
 							value={confirmar}
 							type="password"
-							id="confirma"
-							name="confirma"
+							id="confirmar"
+							name="confirmar"
 							placeholder="*******"
 							onChange={onChange}
 						/>

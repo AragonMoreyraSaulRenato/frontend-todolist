@@ -6,7 +6,7 @@ import {
 	VALIDAR_FORMULARIO,
 	PROYECTO_ACTUAL,
 	ELIMINAR_PROYECTO,
-} from "../../types";
+} from "./proyectoTypes";
 
 interface IActionProyecto {
 	type: string;

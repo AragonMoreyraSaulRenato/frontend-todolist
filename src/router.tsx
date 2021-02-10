@@ -7,18 +7,24 @@ import Proyectos from "./components/proyectos/Proyectos";
 
 import ProyectoState from "./context/proyectos/ProyectoState";
 import TareaState from "./context/tareas/TareaState";
+import AlertaState from "./context/alertas/AlertaState";
+import AuthState from "./context/authentication/AuthState";
 
 export default function MyRoutes(): ReactElement {
 	return (
 		<ProyectoState>
 			<TareaState>
-				<Router>
-					<Switch>
-						<Route exact path="/" component={SignIn} />
-						<Route exact path="/nueva-cuenta" component={SignUp} />
-						<Route exact path="/proyectos" component={Proyectos} />
-					</Switch>
-				</Router>
+				<AlertaState>
+					<AuthState>
+						<Router>
+							<Switch>
+								<Route exact path="/" component={SignIn} />
+								<Route exact path="/nueva-cuenta" component={SignUp} />
+								<Route exact path="/proyectos" component={Proyectos} />
+							</Switch>
+						</Router>
+					</AuthState>
+				</AlertaState>
 			</TareaState>
 		</ProyectoState>
 	);

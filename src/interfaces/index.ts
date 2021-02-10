@@ -9,3 +9,9 @@ export interface ITarea {
 	estado?: boolean;
 	proyectoId?: number;
 }
+
+export interface IUsuario {
+	nombre: string;
+	email: string;
+	password: string;
+}
