@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { ReactElement } from "react";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
@@ -10,6 +10,8 @@ import TareaState from "./context/tareas/TareaState";
 import AlertaState from "./context/alertas/AlertaState";
 import AuthState from "./context/authentication/AuthState";
 import tokenAuth from "./config/tokenAuth";
+import RutaPrivada from "./components/routes/RutaPrivada";
+import RutaPublica from "./components/routes/RutaPublica";
 
 const token = localStorage.getItem("token");
 if (token) {
@@ -24,9 +26,19 @@ export default function MyRoutes(): ReactElement {
 					<AuthState>
 						<Router>
 							<Switch>
-								<Route exact path="/" component={SignIn} />
-								<Route exact path="/nueva-cuenta" component={SignUp} />
-								<Route exact path="/proyectos" component={Proyectos} />
+								<RutaPublica
+									exact
+									path="/"
+									component={SignIn}
+									restricted={true}
+								/>
+								<RutaPublica
+									exact
+									path="/nueva-cuenta"
+									component={SignUp}
+									restricted={true}
+								/>
+								<RutaPrivada exact path="/proyectos" component={Proyectos} />
 							</Switch>
 						</Router>
 					</AuthState>

@@ -9,6 +9,7 @@ interface IContextAuth {
 		msg: string;
 		category: string;
 	} | null;
+	cargando: boolean;
 	registrarUsuario: (usuario: IUsuario) => void;
 	iniciarSesion: (usuario: IUsuario) => void;
 	usuarioAutenticado: () => void;
@@ -19,6 +20,7 @@ const alertaContext = createContext<IContextAuth>({
 	autenticado: null,
 	usuario: null,
 	mensaje: null,
+	cargando: true,
 	registrarUsuario: () => {},
 	iniciarSesion: () => {},
 	usuarioAutenticado: () => {},

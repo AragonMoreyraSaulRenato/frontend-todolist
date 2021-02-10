@@ -16,6 +16,7 @@ const reducer = (state, action) => {
 				...state,
 				autenticado: true,
 				mensaje: null,
+				cargando: false,
 			};
 
 		case OBTENER_USUARIO:
@@ -23,6 +24,7 @@ const reducer = (state, action) => {
 				...state,
 				usuario: action.payload,
 				autenticado: true,
+				cargando: false,
 			};
 		case CERRAR_SESION:
 		case LOGIN_ERROR:
@@ -34,6 +36,7 @@ const reducer = (state, action) => {
 				mensaje: action.payload,
 				usuario: null,
 				autenticado: false,
+				cargando: false,
 			};
 		default:
 			return state;

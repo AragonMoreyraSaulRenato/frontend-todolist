@@ -48,7 +48,11 @@ export default function NuevoProyecto(): ReactElement {
 			</button>
 
 			{formulario && (
-				<form className="formulario-nuevo-proyecto" onSubmit={onSubmit}>
+				<form
+					className="formulario-nuevo-proyecto"
+					onSubmit={onSubmit}
+					autoComplete="off"
+				>
 					<input
 						type="text"
 						className="input-text"

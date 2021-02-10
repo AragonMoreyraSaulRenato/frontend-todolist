@@ -35,6 +35,7 @@ export default function SignIn(props): ReactElement {
 
 		if (email.trim() === "" || password.trim() === "") {
 			mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
+			return;
 		}
 
 		iniciarSesion({ email, password });
@@ -48,7 +49,7 @@ export default function SignIn(props): ReactElement {
 			<div className="contenedor-form sombrea-dark">
 				<h1>Iniciar Sesion</h1>
 
-				<form onSubmit={onSubmit}>
+				<form onSubmit={onSubmit} autoComplete="off">
 					<div className="campo-form">
 						<label htmlFor="email">Email</label>
 						<input

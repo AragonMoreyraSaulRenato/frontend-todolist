@@ -76,7 +76,7 @@ export default function SignUp(props): ReactElement {
 			<div className="contenedor-form sombrea-dark">
 				<h1>Obtener una cuenta</h1>
 
-				<form onSubmit={onSubmit}>
+				<form onSubmit={onSubmit} autoComplete="off">
 					<div className="campo-form">
 						<label htmlFor="nombre">Nombre</label>
 						<input
