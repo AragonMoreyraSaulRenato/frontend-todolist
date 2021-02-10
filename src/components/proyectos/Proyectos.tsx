@@ -10,6 +10,7 @@ export default function Proyectos(): ReactElement {
 
 	useEffect(() => {
 		usuarioAutenticado();
+
 		// eslint-disable-next-line
 	}, []);
 
