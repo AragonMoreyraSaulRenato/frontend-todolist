@@ -12,7 +12,7 @@ import {
 
 interface IActionTarea {
 	type: string;
-	payload?: ITarea | Array<ITarea> | number;
+	payload?: ITarea | Array<ITarea> | string;
 }
 
 const reducer = (state, action: IActionTarea) => {
@@ -36,7 +36,7 @@ const reducer = (state, action: IActionTarea) => {
 			return {
 				...state,
 				tareas: state.tareas.filter(
-					(tarea: ITarea) => tarea.id !== action.payload
+					(tarea: ITarea) => tarea._id !== action.payload
 				),
 			};
 		case ESTADO_TAREA:
@@ -45,7 +45,7 @@ const reducer = (state, action: IActionTarea) => {
 			return {
 				...state,
 				tareas: state.tareas.map((tarea: ITarea) =>
-					tarea.id === tareaPayload.id ? tareaPayload : tarea
+					tarea._id === tareaPayload._id ? tareaPayload : tarea
 				),
 			};
 		case TAREA_ACTUAL:

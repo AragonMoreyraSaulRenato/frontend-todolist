@@ -1,29 +1,19 @@
 import { createContext } from "react";
-import { IProyecto } from "../../interfaces";
+import { IAlerta, IProyecto } from "../../interfaces";
 
-interface IContextProyecto {
+export interface IContextProyecto {
 	formulario: boolean;
 	error: boolean;
 	proyectos: Array<IProyecto>;
 	proyecto: IProyecto | null;
+	mensaje: IAlerta | null;
 	mostrarFormulario: () => void;
 	obtenerProyectos: () => void;
-	agregarProyecto: (proyecto: IProyecto) => void;
+	agregarProyecto: (proyecto: IProyecto) => Promise<any>;
 	mostrarError: () => void;
-	proyectoActual: (id: number) => void;
-	eliminarProyecto: (id: number) => void;
+	proyectoActual: (id: string) => void;
+	eliminarProyecto: (id: string) => void;
 }
 
-const proyectoContext = createContext<IContextProyecto>({
-	formulario: false,
-	error: false,
-	proyectos: [],
-	proyecto: null,
-	mostrarFormulario: () => {},
-	obtenerProyectos: () => {},
-	agregarProyecto: (proyecto: IProyecto) => {},
-	mostrarError: () => {},
-	proyectoActual: (id: number) => {},
-	eliminarProyecto: (id: number) => {},
-});
+const proyectoContext = createContext<Partial<IContextProyecto>>({});
 export default proyectoContext;

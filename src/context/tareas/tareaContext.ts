@@ -6,29 +6,16 @@ interface IContextTarea {
 	tareasProyecto: Array<ITarea> | null;
 	error: boolean;
 	tareaActual: ITarea | null;
-	obtenerTareas: (proyectoId: number) => void;
+	obtenerTareas: (proyectoId: string) => void;
 	agregarTarea: (tarea: ITarea) => void;
 	validarTarea: () => void;
-	eliminarTarea: (tareaId: number) => void;
+	eliminarTarea: (tareaId: string) => void;
 	cambiarEstadoTarea: (tarea: ITarea) => void;
 	guardarTareaActual: (tarea: ITarea) => void;
 	actualizarTarea: (tarea: ITarea) => void;
 	limpiarTarea: () => void;
 }
 
-const TareaContext = createContext<IContextTarea>({
-	tareas: [],
-	tareasProyecto: null,
-	error: false,
-	tareaActual: null,
-	obtenerTareas: (proyectoId: number): void => {},
-	agregarTarea: (tarea: ITarea): void => {},
-	validarTarea: () => {},
-	eliminarTarea: (tareaId: number) => {},
-	cambiarEstadoTarea: (tarea: ITarea) => {},
-	guardarTareaActual: (tarea: ITarea) => {},
-	actualizarTarea: (tarea: ITarea) => {},
-	limpiarTarea: () => {},
-});
+const TareaContext = createContext<Partial<IContextTarea>>({});
 
 export default TareaContext;

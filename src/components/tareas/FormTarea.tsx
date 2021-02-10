@@ -41,25 +41,25 @@ export default function FormTarea() {
 
 		//validar
 		if (tarea.nombre?.trim() === "") {
-			validarTarea();
+			validarTarea!();
 			return;
 		}
 
-		const idProyecto = proyecto.id as number;
+		const idProyecto = proyecto._id as string;
 		if (!tareaActual) {
 			const newTarea: ITarea = {
 				...tarea,
 				proyectoId: idProyecto,
 				estado: false,
 			};
-			agregarTarea(newTarea);
+			agregarTarea!(newTarea);
 		} else {
-			actualizarTarea({ ...tareaActual, ...tarea });
-			limpiarTarea();
+			actualizarTarea!({ ...tareaActual, ...tarea });
+			limpiarTarea!();
 		}
 
 		//obtener y filtrar tareas del proyecto actual
-		obtenerTareas(idProyecto);
+		obtenerTareas!(idProyecto);
 
 		//limpiar form
 		setTarea({ nombre: "" });

@@ -13,9 +13,9 @@ const Proyecto = ({ proyecto }: Props) => {
 	const { obtenerTareas } = useContext(tareasContext);
 
 	//AGREGAR EL PROYECTO ACTUAL
-	const seleccionarProyecto = (proyectoId: number): void => {
-		proyectoActual(proyectoId);
-		obtenerTareas(proyectoId);
+	const seleccionarProyecto = (proyectoId: string): void => {
+		proyectoActual!(proyectoId);
+		obtenerTareas!(proyectoId);
 	};
 
 	return (
@@ -23,7 +23,7 @@ const Proyecto = ({ proyecto }: Props) => {
 			<button
 				type="button"
 				className="btn btn-blank"
-				onClick={() => seleccionarProyecto(proyecto.id ? proyecto.id : 0)}
+				onClick={() => seleccionarProyecto(proyecto._id ? proyecto._id : "")}
 			>
 				{proyecto.nombre}
 			</button>

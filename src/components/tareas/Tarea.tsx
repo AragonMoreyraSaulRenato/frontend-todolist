@@ -16,20 +16,20 @@ export default function Tarea({ tarea }: TareaProps) {
 		guardarTareaActual,
 	} = useContext(tareasContext);
 
-	const handleDelete = (tareaId: number) => {
-		const idProyecto = proyecto?.id as number;
-		eliminarTarea(tareaId);
-		obtenerTareas(idProyecto);
+	const handleDelete = (tareaId: string) => {
+		const idProyecto = proyecto?._id as string;
+		eliminarTarea!(tareaId);
+		obtenerTareas!(idProyecto);
 	};
 
 	const cambiarEstado = (tarea: ITarea) => {
 		if (tarea.estado) tarea.estado = false;
 		else tarea.estado = true;
-		cambiarEstadoTarea(tarea);
+		cambiarEstadoTarea!(tarea);
 	};
 
 	const seleccionarTarea = (tarea: ITarea) => {
-		guardarTareaActual(tarea);
+		guardarTareaActual!(tarea);
 	};
 
 	return (
@@ -67,7 +67,7 @@ export default function Tarea({ tarea }: TareaProps) {
 				<button
 					type="button"
 					className="btn btn-secundario"
-					onClick={() => handleDelete(tarea.id ? tarea.id : 0)}
+					onClick={() => handleDelete(tarea._id ? tarea._id : "")}
 				>
 					Eliminar
 				</button>

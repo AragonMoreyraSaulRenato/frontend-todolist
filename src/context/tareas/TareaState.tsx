@@ -2,7 +2,6 @@ import { ReactElement, useReducer } from "react";
 import { ITarea } from "../../interfaces";
 import TareaContext from "./tareaContext";
 import TareaReducer from "./tareaReducer";
-import { v4 as uuid } from "uuid";
 import {
 	TAREAS_PROYECTO,
 	AGREGAR_TAREA,
@@ -37,12 +36,11 @@ const TareaState = (props: ContextProps) => {
 
 	const [state, dispatch] = useReducer(TareaReducer, initalState);
 
-	const obtenerTareas = (proyectoId: number): void => {
+	const obtenerTareas = (proyectoId: string): void => {
 		dispatch({ type: TAREAS_PROYECTO, payload: proyectoId });
 	};
 
 	const agregarTarea = (tarea: ITarea): void => {
-		tarea.id = uuid();
 		dispatch({ type: AGREGAR_TAREA, payload: tarea });
 	};
 
@@ -50,7 +48,7 @@ const TareaState = (props: ContextProps) => {
 		dispatch({ type: VALIDAR_TAREA });
 	};
 
-	const eliminarTarea = (tareaId: number): void => {
+	const eliminarTarea = (tareaId: string): void => {
 		dispatch({ type: ELIMINAR_TAREA, payload: tareaId });
 	};
 

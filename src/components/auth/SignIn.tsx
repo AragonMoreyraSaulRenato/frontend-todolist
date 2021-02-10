@@ -18,7 +18,7 @@ export default function SignIn(props): ReactElement {
 	useEffect(() => {
 		if (autenticado) props.history.push("/proyectos");
 
-		if (mensaje) mostrarAlerta(mensaje.msg, "alerta-error");
+		if (mensaje) mostrarAlerta!(mensaje.msg, mensaje.category);
 
 		// eslint-disable-next-line
 	}, [mensaje, autenticado, props.history]);
@@ -34,7 +34,7 @@ export default function SignIn(props): ReactElement {
 		e.preventDefault();
 
 		if (email.trim() === "" || password.trim() === "") {
-			mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
+			mostrarAlerta!("Todos los campos son obligatorios", "alerta-error");
 			return;
 		}
 

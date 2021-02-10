@@ -1,5 +1,6 @@
 import { ReactElement, Fragment, useState, useContext } from "react";
 import proyectoContext from "../../context/proyectos/proyectoContext";
+
 import { IProyecto } from "../../interfaces";
 
 export default function NuevoProyecto(): ReactElement {
@@ -26,12 +27,12 @@ export default function NuevoProyecto(): ReactElement {
 
 		//validator
 		if (nombre === "") {
-			mostrarError();
+			mostrarError!();
 			return;
 		}
 
 		//agregar al states
-		agregarProyecto(proyecto);
+		if (agregarProyecto) agregarProyecto(proyecto);
 
 		//reset form
 		setProyecto({ nombre: "" });
@@ -42,7 +43,7 @@ export default function NuevoProyecto(): ReactElement {
 			<button
 				type="button"
 				className="btn btn-block btn-primario"
-				onClick={() => mostrarFormulario()}
+				onClick={() => mostrarFormulario!()}
 			>
 				Nuevo Proyecto
 			</button>

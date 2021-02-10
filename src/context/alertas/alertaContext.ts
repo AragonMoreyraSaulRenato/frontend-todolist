@@ -1,15 +1,10 @@
 import { createContext } from "react";
+import { IAlerta } from "../../interfaces";
 
 interface IContextAlerta {
-	alerta: {
-		msg: string;
-		category: string;
-	} | null;
+	alerta: IAlerta | null;
 	mostrarAlerta: (msg: string, category: string) => void;
 }
-const alertaContext = createContext<IContextAlerta>({
-	alerta: null,
-	mostrarAlerta: (msg: string, category: string) => {},
-});
+const alertaContext = createContext<Partial<IContextAlerta>>({});
 
 export default alertaContext;

@@ -1,17 +1,22 @@
 export interface IProyecto {
-	id?: number;
+	_id?: string;
 	nombre?: string;
 }
 
 export interface ITarea {
-	id?: number;
+	_id?: string;
 	nombre?: string;
 	estado?: boolean;
-	proyectoId?: number;
+	proyectoId?: string;
 }
 
 export interface IUsuario {
 	nombre?: string;
 	email?: string;
 	password?: string;
+}
+
+export interface IAlerta {
+	msg: string;
+	category: string;
 }

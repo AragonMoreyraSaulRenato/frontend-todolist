@@ -10,7 +10,7 @@ export default function SignUp(props): ReactElement {
 	useEffect(() => {
 		if (autenticado) props.history.push("/proyectos");
 
-		if (mensaje) mostrarAlerta(mensaje.msg, "alerta-error");
+		if (mensaje) mostrarAlerta!(mensaje.msg, "alerta-error");
 
 		// eslint-disable-next-line
 	}, [mensaje, autenticado, props.history]);
@@ -41,13 +41,13 @@ export default function SignUp(props): ReactElement {
 			password.trim() === "" ||
 			confirmar.trim() === ""
 		) {
-			mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
+			mostrarAlerta!("Todos los campos son obligatorios", "alerta-error");
 			return;
 		}
 
 		//password minimo 6 caracteres
 		if (password.length < 6) {
-			mostrarAlerta(
+			mostrarAlerta!(
 				"La contraseña debe ser de al menos 6 caracteres",
 				"alerta-error"
 			);
@@ -56,7 +56,7 @@ export default function SignUp(props): ReactElement {
 
 		//dos password iguales
 		if (password !== confirmar) {
-			mostrarAlerta("Las contraseñas no coinciden", "alerta-error");
+			mostrarAlerta!("Las contraseñas no coinciden", "alerta-error");
 			return;
 		}
 
