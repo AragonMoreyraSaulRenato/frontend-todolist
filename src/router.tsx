@@ -9,6 +9,12 @@ import ProyectoState from "./context/proyectos/ProyectoState";
 import TareaState from "./context/tareas/TareaState";
 import AlertaState from "./context/alertas/AlertaState";
 import AuthState from "./context/authentication/AuthState";
+import tokenAuth from "./config/tokenAuth";
+
+const token = localStorage.getItem("token");
+if (token) {
+	tokenAuth(token);
+}
 
 export default function MyRoutes(): ReactElement {
 	return (

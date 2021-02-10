@@ -83,6 +83,7 @@ const AuthState = ({ children }: ContextProps) => {
 				mensaje: state.mensaje,
 				registrarUsuario,
 				iniciarSesion,
+				usuarioAutenticado,
 			}}
 		>
 			{children}
