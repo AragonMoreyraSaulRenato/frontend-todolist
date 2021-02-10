@@ -17,6 +17,14 @@ const reducer = (state, action) => {
 				autenticado: true,
 				mensaje: null,
 			};
+
+		case OBTENER_USUARIO:
+			return {
+				...state,
+				usuario: action.payload,
+				autenticado: true,
+			};
+		case CERRAR_SESION:
 		case LOGIN_ERROR:
 		case REGISTRO_ERROR:
 			localStorage.removeItem("token");
@@ -24,9 +32,9 @@ const reducer = (state, action) => {
 				...state,
 				token: null,
 				mensaje: action.payload,
+				usuario: null,
+				autenticado: false,
 			};
-		case OBTENER_USUARIO:
-			return { ...state, usuario: action.payload };
 		default:
 			return state;
 	}

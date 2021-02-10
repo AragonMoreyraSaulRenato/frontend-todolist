@@ -74,6 +74,10 @@ const AuthState = ({ children }: ContextProps) => {
 		}
 	};
 
+	const cerrarSesion = () => {
+		dispatch({ type: CERRAR_SESION });
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -84,6 +88,7 @@ const AuthState = ({ children }: ContextProps) => {
 				registrarUsuario,
 				iniciarSesion,
 				usuarioAutenticado,
+				cerrarSesion,
 			}}
 		>
 			{children}

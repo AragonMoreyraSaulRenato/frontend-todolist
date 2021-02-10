@@ -12,6 +12,7 @@ interface IContextAuth {
 	registrarUsuario: (usuario: IUsuario) => void;
 	iniciarSesion: (usuario: IUsuario) => void;
 	usuarioAutenticado: () => void;
+	cerrarSesion: () => void;
 }
 const alertaContext = createContext<IContextAuth>({
 	token: null,
@@ -21,6 +22,7 @@ const alertaContext = createContext<IContextAuth>({
 	registrarUsuario: () => {},
 	iniciarSesion: () => {},
 	usuarioAutenticado: () => {},
+	cerrarSesion: () => {},
 });
 
 export default alertaContext;
