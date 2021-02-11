@@ -7,7 +7,7 @@ export interface ITarea {
 	_id?: string;
 	nombre?: string;
 	estado?: boolean;
-	proyectoId?: string;
+	proyecto?: string;
 }
 
 export interface IUsuario {

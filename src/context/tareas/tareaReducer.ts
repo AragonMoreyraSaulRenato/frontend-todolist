@@ -4,7 +4,6 @@ import {
 	AGREGAR_TAREA,
 	VALIDAR_TAREA,
 	ELIMINAR_TAREA,
-	ESTADO_TAREA,
 	TAREA_ACTUAL,
 	ACTUALIZAR_TAREA,
 	LIMPIAR_TAREA,
@@ -20,14 +19,12 @@ const reducer = (state, action: IActionTarea) => {
 		case TAREAS_PROYECTO:
 			return {
 				...state,
-				tareasProyecto: state.tareas.filter(
-					(tarea: ITarea) => tarea.proyectoId === action.payload
-				),
+				tareasProyecto: action.payload,
 			};
 		case AGREGAR_TAREA:
 			return {
 				...state,
-				tareas: [action.payload, ...state.tareas],
+				tareasProyecto: [action.payload, ...state.tareasProyecto],
 				error: false,
 			};
 		case VALIDAR_TAREA:
@@ -35,16 +32,15 @@ const reducer = (state, action: IActionTarea) => {
 		case ELIMINAR_TAREA:
 			return {
 				...state,
-				tareas: state.tareas.filter(
+				tareasProyecto: state.tareasProyecto.filter(
 					(tarea: ITarea) => tarea._id !== action.payload
 				),
 			};
-		case ESTADO_TAREA:
 		case ACTUALIZAR_TAREA:
 			const tareaPayload = action.payload as ITarea;
 			return {
 				...state,
-				tareas: state.tareas.map((tarea: ITarea) =>
+				tareasProyecto: state.tareasProyecto.map((tarea: ITarea) =>
 					tarea._id === tareaPayload._id ? tareaPayload : tarea
 				),
 			};

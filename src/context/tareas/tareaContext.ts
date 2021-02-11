@@ -2,15 +2,14 @@ import { createContext } from "react";
 import { ITarea } from "../../interfaces";
 
 interface IContextTarea {
-	tareas: Array<ITarea>;
+	/* tareas: Array<ITarea>; */
 	tareasProyecto: Array<ITarea> | null;
 	error: boolean;
 	tareaActual: ITarea | null;
 	obtenerTareas: (proyectoId: string) => void;
 	agregarTarea: (tarea: ITarea) => void;
 	validarTarea: () => void;
-	eliminarTarea: (tareaId: string) => void;
-	cambiarEstadoTarea: (tarea: ITarea) => void;
+	eliminarTarea: (tareaId: string, proyectoId: string) => void;
 	guardarTareaActual: (tarea: ITarea) => void;
 	actualizarTarea: (tarea: ITarea) => void;
 	limpiarTarea: () => void;

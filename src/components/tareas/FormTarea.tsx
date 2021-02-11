@@ -49,8 +49,7 @@ export default function FormTarea() {
 		if (!tareaActual) {
 			const newTarea: ITarea = {
 				...tarea,
-				proyectoId: idProyecto,
-				estado: false,
+				proyecto: idProyecto,
 			};
 			agregarTarea!(newTarea);
 		} else {

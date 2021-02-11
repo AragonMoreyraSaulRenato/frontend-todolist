@@ -51,10 +51,9 @@ const AuthState = ({ children }: ContextProps) => {
 			//Funcion para enviar token por header
 			tokenAuth(token);
 		}
-
 		try {
 			const respuesta = await clienteAxios.get("/api/auth");
-			dispatch({ type: OBTENER_USUARIO, payload: respuesta.data.usuario });
+			dispatch({ type: OBTENER_USUARIO, payload: respuesta.data });
 		} catch (error) {
 			dispatch({ type: LOGIN_ERROR });
 		}

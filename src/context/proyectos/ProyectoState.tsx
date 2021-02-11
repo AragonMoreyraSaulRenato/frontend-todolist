@@ -27,6 +27,14 @@ const ProyectoState = (props: ContextProps) => {
 		mensaje: null,
 	});
 
+	const showError = () => {
+		const alerta = {
+			msg: "Hubio un error",
+			category: "alerta-error",
+		};
+		dispatch({ type: PROYECTO_ERROR, payload: alerta });
+	};
+
 	const mostrarFormulario = (): void => {
 		dispatch({
 			type: FORMULARIO_PROYECTO,
@@ -39,7 +47,7 @@ const ProyectoState = (props: ContextProps) => {
 			const proyectos = data as Array<IProyecto>;
 			dispatch({ type: OBTENER_PROYECTOS, payload: proyectos });
 		} catch (error) {
-			console.log(error);
+			showError();
 		}
 	};
 
@@ -48,7 +56,7 @@ const ProyectoState = (props: ContextProps) => {
 			const resultado = await clienteAxios.post("/api/proyectos", proyecto);
 			dispatch({ type: AGREGAR_PROYECTO, payload: resultado.data.proyecto });
 		} catch (error) {
-			console.error(error);
+			showError();
 		}
 	};
 
@@ -66,11 +74,7 @@ const ProyectoState = (props: ContextProps) => {
 			await clienteAxios.delete(`/api/proyectos/${id}`);
 			dispatch({ type: ELIMINAR_PROYECTO, payload: id });
 		} catch (error) {
-			const alerta = {
-				msg: "Hubio un error",
-				category: "alerta-error",
-			};
-			dispatch({ type: PROYECTO_ERROR, payload: alerta });
+			showError();
 		}
 	};
 

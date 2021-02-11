@@ -17,13 +17,13 @@ export default function ListadoTareas() {
 		<Fragment>
 			<h2>Proyecto: {proyecto.nombre}</h2>
 			<ul className="listado-tareas">
-				{!tareasProyecto ? (
+				{tareasProyecto?.length === 0 ? (
 					<li className="tarea">
 						<p>No hay tareas</p>
 					</li>
 				) : (
 					<TransitionGroup ref={transitionRef}>
-						{tareasProyecto.map((tarea: ITarea) => (
+						{tareasProyecto?.map((tarea: ITarea) => (
 							<CSSTransition
 								timeout={200}
 								classNames="tarea"

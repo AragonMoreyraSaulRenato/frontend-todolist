@@ -12,20 +12,19 @@ export default function Tarea({ tarea }: TareaProps) {
 	const {
 		eliminarTarea,
 		obtenerTareas,
-		cambiarEstadoTarea,
+		actualizarTarea,
 		guardarTareaActual,
 	} = useContext(tareasContext);
 
 	const handleDelete = (tareaId: string) => {
 		const idProyecto = proyecto?._id as string;
-		eliminarTarea!(tareaId);
+		eliminarTarea!(tareaId, idProyecto);
 		obtenerTareas!(idProyecto);
 	};
 
 	const cambiarEstado = (tarea: ITarea) => {
-		if (tarea.estado) tarea.estado = false;
-		else tarea.estado = true;
-		cambiarEstadoTarea!(tarea);
+		tarea.estado = !tarea.estado;
+		actualizarTarea!(tarea);
 	};
 
 	const seleccionarTarea = (tarea: ITarea) => {
