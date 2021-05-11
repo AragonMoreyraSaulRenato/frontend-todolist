@@ -1,0 +1,67 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Global Envs
+    env:
+      GITHUB_TARGET_REPOSITORY_USER: SaulMoreyra
+      GITHUB_TARGET_REPOSITORY_NAME: backend-todolist
+      GITHUB_TARGET_BUNDLE_PATH: public
+
+      GITHUB_ORIGIN_REPOSITORY_NAME: ${{ github.repository }}
+      GITHUB_ORIGIN_BUNDLE_PATH: build
+
+      GITHUB_USER_NAME: SaulMoreyra
+      GITHUB_USER_EMAIL: armhacam21@gmail.com
+
+      GITHUB_TOKEN: ${{ secrets.BUILD_KEY }}
+      GITHUB_BUILD_ID: ${{ github.run_number }}
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Install Yarn
+        run: npm install yarn
+
+      - name: Compile Project
+        run: |
+          npm run build
+      - name: Clone Repo
+        run: |
+          GITHUB_TARGET_REPOSITORY=$GITHUB_TARGET_REPOSITORY_USER/$GITHUB_TARGET_REPOSITORY_NAME
+          echo $GITHUB_TARGET_REPOSITORY
+          git clone https://user:$GITHUB_TOKEN@github.com/$GITHUB_TARGET_REPOSITORY
+      - name: Copy Files
+        run: |
+          echo "Root Files"
+          ls
+          INPUT=./$GITHUB_ORIGIN_BUNDLE_PATH
+          OUTPUT=./$GITHUB_TARGET_REPOSITORY_NAME/$GITHUB_TARGET_BUNDLE_PATH
+          echo Input Path $INPUT
+          echo Output Path $OUTPUT
+
+          cp -ra $INPUT/. $OUTPUT
+
+      - name: Commit & Push Files
+        run: |
+          GITHUB_TARGET_REPOSITORY=$GITHUB_TARGET_REPOSITORY_USER/$GITHUB_TARGET_REPOSITORY_NAME
+          GITHUB_BRANCH=automatic_deploy_from_"$GITHUB_ORIGIN_REPOSITORY_NAME"_to_"$GITHUB_TARGET_REPOSITORY"_"$GITHUB_BUILD_ID"
+          cd ./$GITHUB_TARGET_REPOSITORY_NAME
+          git config --global user.name "$GITHUB_USER_NAME"
+          git config --global user.email "$GITHUB_USER_EMAIL"
+
+          echo "Github User"
+          git config user.name
+          git config user.email
+          git checkout -b $GITHUB_BRANCH
+          git add .
+          git commit -am "New release version"
+          git push origin $GITHUB_BRANCH
